@@ -8,6 +8,7 @@ public class Basket : MonoBehaviour {
 	public GameObject cam;
 	public GameObject leftPivot;
 	public GameObject rightPivot;
+	public GameObject spawnPoint;
 	private Vector3 leftParentPos;
 	private Vector3 rightParentPos;
 	private Rigidbody rB;
@@ -42,6 +43,7 @@ public class Basket : MonoBehaviour {
 		Vector3 currMousePos = Input.mousePosition;
 		if (clicked)
 		{
+
 			float x = transform.position.x;
 			float z = transform.position.z;
 			float y = transform.position.y;
@@ -59,6 +61,25 @@ public class Basket : MonoBehaviour {
 			z = Mathf.Clamp(z, transform.parent.position.z - zStretch, transform.parent.position.z + zStretch);
 			x = Mathf.Clamp(x, transform.parent.position.x -maxStretch, transform.parent.position.x + maxStretch);
 			transform.position = new Vector3(x,y, z);
+			if (transform.position.x < transform.parent.position.x)
+			{
+				float xx = transform.localPosition.x;
+				float yy = transform.localPosition.y;
+				float zz = transform.localPosition.z;
+
+				float vertHypotenuse = Mathf.Sqrt((xx * xx ) + (yy * yy));
+				float horHypotenuse = Mathf.Sqrt((zz * zz) + (xx * xx));
+
+				float horRot = Mathf.Asin(zz/horHypotenuse)* Mathf.Rad2Deg;
+				float verRot = Mathf.Asin(yy/vertHypotenuse)* Mathf.Rad2Deg * -1.0f;
+
+				Quaternion q = Quaternion.identity;
+
+				q.eulerAngles = (new Vector3(0.0f, horRot, verRot));
+				transform.rotation = q;
+
+
+			}
 		}
 		prevMousePos = currMousePos;
 		Vector3[] leftPosList = new Vector3[2];
@@ -80,8 +101,7 @@ public class Basket : MonoBehaviour {
 		else if (Input.GetMouseButtonUp(0))
 		{
 			clicked = false;
-			Vector3 forw = new Vector3(transform.position.x + 0.3f, transform.position.y, transform.position.z);
-			Instantiate(ball, forw, transform.rotation);
+			Instantiate(ball, spawnPoint.transform.position, transform.rotation);
 		}
 	}
 	void FixedUpdate()
@@ -114,9 +134,10 @@ public class Basket : MonoBehaviour {
 			rightStretch = 0.3f / 0.0001f;
 		}
 
-		leftLine.SetWidth(leftStretch, leftStretch);
-		rightLine.SetWidth(rightStretch, rightStretch);
-
+		leftLine.startWidth = leftStretch;
+		leftLine.endWidth = leftStretch;
+		rightLine.startWidth = rightStretch;
+		rightLine.endWidth = rightStretch;
 		
 		if (!clicked)
 		{
