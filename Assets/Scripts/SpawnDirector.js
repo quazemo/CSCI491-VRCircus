@@ -35,15 +35,15 @@ function updateDifficulty()
 			Debug.Log("Easy mode, " + difficulty);
 			break;
 		case 1:
-			spawnTimerL = 6f;
+			spawnTimerL = 1f;
 			spawnTimerU = 1000f;
-			spawnVariance = 5f;
+			spawnVariance = 3f;
 			Debug.Log("Medium mode, " + difficulty);
 			break;
 		case 2:
-			spawnTimerL = 7f;
+			spawnTimerL = 0f;
 			spawnTimerU = 100f;
-			spawnVariance = 7f;
+			spawnVariance = 2f;
 			Debug.Log("Hard mode, " + difficulty);
 			break;
 		default:
@@ -73,7 +73,7 @@ function Update ()
 	{
 		spawnTarget = true;
 	}
-	if (targetTimer <= 0)
+	if (abductTimer <= 0)
 	{
 		spawnAbductor = true;
 	}
@@ -108,7 +108,20 @@ function variance() : float
 
 function spawnRandAbductor()  
 {
-	
+	var notSpawned : boolean = true;
+	var spawnIndex : int;
+	var trySpawn : int = 2;
+
+	while (notSpawned && trySpawn > 0)
+	{
+		spawnIndex = Random.Range(0, 2); 
+		if (highWalls[spawnIndex].getCount() < MAX_SPAWNS)
+		{
+			highWalls[spawnIndex].randomSpawn();
+			notSpawned = false;
+		}
+		trySpawn--;
+	}
 }
 
 function spawnRandTarget()
