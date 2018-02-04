@@ -44,7 +44,10 @@ function randomSpawn () {
 	 		target = Instantiate(targetBasic, spawnPos, Quaternion.identity, spawnRight.transform);
 	 		break;
 	 }
-	 target.transform.rotation.SetLookRotation(target.parent.forward, target.parent.transform.up);
+	 var rot : Quaternion = new Quaternion();
+	 rot.SetLookRotation(target.parent.forward, target.parent.transform.up);
+	 target.rotation = rot;
+	 //target.transform.rotation.SetLookRotation(target.parent.forward, target.parent.transform.up);
 	 target.transform.Translate((Vector3.forward * (.3 * count)));
 	 /*
 	 if (target.transform.right == target.parent.transform.right)

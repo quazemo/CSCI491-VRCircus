@@ -23,22 +23,22 @@ function Awake ()
 	switch (parent.name)
 	{
 		case "SpawnLeft":
-			travelDir = parent.transform.right;
+			travelDir = Vector3.right;
 			break;
 		case "SpawnMid":
 			var dir : int = Random.Range(0, 2);
 			switch (dir)
 			{
 				case 0:
-					travelDir = -parent.transform.right;
+					travelDir = Vector3.left;
 					break;
 				case 1:
-					travelDir = parent.transform.right;
+					travelDir = Vector3.right;
 					break;
 			}
 			break;
 		case "SpawnRight":
-			travelDir = -parent.transform.right;
+			travelDir = Vector3.left;
 			break;
 	}
 	transform.SetParent(null);

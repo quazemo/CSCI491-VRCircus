@@ -28,24 +28,29 @@ function randomSpawn () {
 	 {
 	 	case 0:
 	 		spawnPos = spawnLeft.transform.position;
-	 		spawnPos.z += .3 * count;
-	 		spawnPos.y += SPAWN_DEPTH; 
+	 		//spawnPos.z += .3 * count;
+	 		//spawnPos.y += SPAWN_DEPTH; 
 	 		target = Instantiate(targetBasic, spawnPos, spawnAngle, spawnLeft.transform);
 	 		break;
 	 	case 1:
 	 		spawnPos = spawnMid.transform.position;
-	 		spawnPos.z += .3 * count;
-	 		spawnPos.y += SPAWN_DEPTH;
+	 		//spawnPos.z += .3 * count;
+	 		//spawnPos.y += SPAWN_DEPTH;
 	 		target = Instantiate(targetBasic, spawnPos, spawnAngle, spawnMid.transform);
 	 		break;
 	 	case 2:
 	 		spawnPos = spawnRight.transform.position;
-	 		spawnPos.z += .3 * count;
-	 		spawnPos.y += SPAWN_DEPTH;
+	 		//spawnPos.z += .3 * count;
+	 		//spawnPos.y += SPAWN_DEPTH;
 	 		target = Instantiate(targetBasic, spawnPos, spawnAngle, spawnRight.transform);
 	 		break;
 	 }
-	 target.transform.rotation.SetLookRotation(target.parent.forward, target.parent.transform.up);
+	 var rot : Quaternion = new Quaternion();
+	 rot.SetLookRotation(target.parent.forward, target.parent.transform.up);
+	 target.rotation = rot;
+	 //target.transform.rotation.SetLookRotation(target.parent.forward, target.parent.transform.up);
+	 target.transform.Translate((Vector3.forward * (.3 * count)));
+	 target.Translate(-Vector3.up * (SPAWN_DEPTH));
 	 /*
 	 if (target.transform.right == target.parent.transform.right)
 	 {

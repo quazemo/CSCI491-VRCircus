@@ -16,7 +16,7 @@ function Awake ()
 	isUp = false;
 	parent = gameObject.transform.parent;
 	spawner = parent.parent.GetComponent(SpawnUpper);
-	upDir = parent.InverseTransformDirection(parent.transform.up);
+	upDir = Vector3.up;
 	Debug.Log("updir: " + upDir);
 	hSpeed = 1;
 	vSpeed = .5;
@@ -24,22 +24,22 @@ function Awake ()
 	switch (parent.name)
 	{
 		case "SpawnLeft":
-			travelDir = parent.transform.right;
+			travelDir = Vector3.left;
 			break;
 		case "SpawnMid":
 			var dir : int = Random.Range(0, 2);
 			switch (dir)
 			{
 				case 0:
-					travelDir = -parent.transform.right;
+					travelDir = Vector3.left;
 					break;
 				case 1:
-					travelDir = parent.transform.right;
+					travelDir = Vector3.right;
 					break;
 			}
 			break;
 		case "SpawnRight":
-			travelDir = -parent.transform.right;
+			travelDir = Vector3.right;
 			break;
 	}
 	transform.SetParent(null);
