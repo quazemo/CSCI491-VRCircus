@@ -4,6 +4,8 @@ public var spawnLeft : GameObject;
 public var spawnMid : GameObject;
 public var spawnRight : GameObject;
 public static var SPAWN_DEPTH = 1.3;
+public var distance : int;
+public var scoreUpdater : Score;
 
 var targetBasic : Transform;
 
@@ -11,9 +13,9 @@ public var count : int = 0;
 
 function Start () {
 
-	randomSpawn();
-	randomSpawn();
-	randomSpawn();
+	//randomSpawn();
+	//randomSpawn();
+	//randomSpawn();
 
 }
 
@@ -58,6 +60,9 @@ function randomSpawn () {
 	 {
 	 	Debug.Log("LParent mismatch: T: " + target.transform.right + "\nP: " + target.parent.transform.right);
 	 }*/
+	 var destructScript :TargetDestruct = target.gameObject.GetComponentInChildren(TargetDestruct);
+	 destructScript.setDistance(distance);
+	 destructScript.setScoreUpdater(scoreUpdater);
 	 target.gameObject.AddComponent(TargetScript);
 	 count++;
 }

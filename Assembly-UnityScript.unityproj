@@ -47,11 +47,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AbductorScript.js" />
+     <Compile Include="Assets\Scripts\EasyStart.js" />
+     <Compile Include="Assets\Scripts\GameTimer.js" />
+     <Compile Include="Assets\Scripts\GunScript.js" />
+     <Compile Include="Assets\Scripts\HardStart.js" />
+     <Compile Include="Assets\Scripts\NormalStart.js" />
+     <Compile Include="Assets\Scripts\ProjectileScript.js" />
      <Compile Include="Assets\Scripts\Score.js" />
      <Compile Include="Assets\Scripts\SpawnDirector.js" />
      <Compile Include="Assets\Scripts\SpawnLower.js" />
      <Compile Include="Assets\Scripts\SpawnUpper.js" />
      <Compile Include="Assets\Scripts\StartScript.js" />
+     <Compile Include="Assets\Scripts\TargetDestruct.js" />
      <Compile Include="Assets\Scripts\TargetScript.js" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

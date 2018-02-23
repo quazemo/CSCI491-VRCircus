@@ -41,14 +41,18 @@ function Awake ()
 			travelDir = Vector3.left;
 			break;
 	}
-	transform.SetParent(null);
+	//transform.SetParent(null);
 	
 }
 
 function Update () 
 {
 
-	if (isUp && !isDone)
+	if (transform.childCount == 0 && !isDone && isUp)
+	{
+		isDone = true;
+	}
+	else if (isUp && !isDone)
 	{
 		transform.Translate(travelDir * hSpeed * Time.deltaTime);
 	}
@@ -85,5 +89,8 @@ function Update ()
 
 function OnCollisionEnter(col : Collision)
 {
-	isDone = true;
+	if (col.gameObject.tag == "ShootingGalleryWall")
+	{
+		isDone = true;
+	}
 }

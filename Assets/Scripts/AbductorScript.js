@@ -17,7 +17,6 @@ function Awake ()
 	parent = gameObject.transform.parent;
 	spawner = parent.parent.GetComponent(SpawnUpper);
 	upDir = Vector3.up;
-	Debug.Log("updir: " + upDir);
 	hSpeed = 1;
 	vSpeed = .5;
 

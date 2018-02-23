@@ -1,14 +1,20 @@
 ﻿#pragma strict
 
+public final var MAX_SPAWNS : int = 3;
+public final var GAME_TIME : float = 10f;
+
 public var difficulty : int;
 public var lowerWalls : SpawnLower[] = new SpawnLower[4];
 public var highWalls : SpawnUpper[] = new SpawnUpper[2];
 public var spawnTimerL: float;
 public var spawnTimerU: float;
 public var spawnVariance: float;
+public var menuBoard: GameObject;
+public var gameTime: GameTimer;
+
 private var targetTimer : float;
 private var abductTimer : float;
-public final var MAX_SPAWNS : int = 3;
+
 
 function Awake () 
 {
@@ -16,11 +22,15 @@ function Awake ()
 	this.enabled = false;
 }
 
-function onStart() 
+function onStart(diff: int) 
 {
 	Debug.Log("OnStart called");
+	difficulty = diff;
 	updateDifficulty();
 	this.enabled = true;
+	gameTime.setTimer(GAME_TIME);
+	gameTime.gameObject.SetActive(true);
+	menuBoard.SetActive(false);
 }
 
 function updateDifficulty()
@@ -29,15 +39,15 @@ function updateDifficulty()
 	switch(difficulty)
 	{
 		case 0:
-			spawnTimerL = 7f;
-			spawnTimerU = 5000f;
-			spawnVariance = 2f;
+			spawnTimerL = 2f;
+			spawnTimerU = 10000f;
+			spawnVariance = 1f;
 			Debug.Log("Easy mode, " + difficulty);
 			break;
 		case 1:
 			spawnTimerL = 1f;
 			spawnTimerU = 1000f;
-			spawnVariance = 3f;
+			spawnVariance = 1f;
 			Debug.Log("Medium mode, " + difficulty);
 			break;
 		case 2:
@@ -59,6 +69,8 @@ function updateDifficulty()
 function onStop() 
 {
 	this.enabled = false;
+	menuBoard.SetActive(true);
+	gameTime.gameObject.SetActive(false);
 }
 
 function Update () 
