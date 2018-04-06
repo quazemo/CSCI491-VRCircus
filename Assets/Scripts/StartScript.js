@@ -1,17 +1,25 @@
 ﻿#pragma strict
 
 public var sd : SpawnDirector;
-private var diff : int = 0;
+private var diff : int = 1;
 
 function OnMouseDown()
 {
-	Debug.Log("Game Stopped");
-	sd.onStop();
+	if (!sd.enabled)
+	{
+		sd.onStart(diff);
+	}
 }
 
 function OnCollisionEnter(col : Collision)
 {
-	Debug.Log("Stop: Collided with " + col.gameObject.tag);
-	sd.onStop();
+    if (!sd.enabled)
+	{
+		sd.onStart(diff);
+	}
 }
 
+function setDifficulty(nDiff : int)
+{
+	diff = nDiff;
+}

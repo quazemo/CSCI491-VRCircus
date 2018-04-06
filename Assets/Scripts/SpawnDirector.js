@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 public final var MAX_SPAWNS : int = 3;
-public final var GAME_TIME : float = 10f;
+public final var GAME_TIME : float = 60f;
 
 public var difficulty : int;
 public var lowerWalls : SpawnLower[] = new SpawnLower[4];
@@ -52,7 +52,7 @@ function updateDifficulty()
 			break;
 		case 2:
 			spawnTimerL = 0f;
-			spawnTimerU = 100f;
+			spawnTimerU = 40f;
 			spawnVariance = 2f;
 			Debug.Log("Hard mode, " + difficulty);
 			break;

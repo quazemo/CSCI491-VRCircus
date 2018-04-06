@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 public var sd : SpawnDirector;
-private var diff : int = 1;
+public var diff : int;
 
 function OnMouseDown()
 {
