@@ -4,6 +4,11 @@ public var timer : float = 0;
 public var director : SpawnDirector;
 public var timeText : UI.Text;
 
+function Awake()
+{
+	gameObject.SetActive(false);
+}
+
 // Update is called once per frame
 function Update () {
 

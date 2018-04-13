@@ -27,5 +27,6 @@ S:\VRCarnival\Temp\bin\Debug\nunit.framework.xml
 S:\VRCarnival\Temp\bin\Debug\UnityEngine.Analytics.xml
 S:\VRCarnival\Temp\bin\Debug\UnityEngine.HoloLens.xml
 S:\VRCarnival\Temp\bin\Debug\UnityEngine.VR.xml
+S:\VRCarnival\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 S:\VRCarnival\obj\Debug\Assembly-CSharp.dll
 S:\VRCarnival\obj\Debug\Assembly-CSharp.pdb

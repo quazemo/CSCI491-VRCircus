@@ -52,11 +52,11 @@
      <Compile Include="Assets\Scripts\GameTimer.js" />
      <Compile Include="Assets\Scripts\GunScript.js" />
      <Compile Include="Assets\Scripts\HardStart.js" />
+     <Compile Include="Assets\Scripts\MenuHandler.js" />
      <Compile Include="Assets\Scripts\NormalStart.js" />
      <Compile Include="Assets\Scripts\Pause.js" />
      <Compile Include="Assets\Scripts\ProjectileScript.js" />
      <Compile Include="Assets\Scripts\Score.js" />
-     <Compile Include="Assets\Scripts\SignAway.js" />
      <Compile Include="Assets\Scripts\SpawnDirector.js" />
      <Compile Include="Assets\Scripts\SpawnLower.js" />
      <Compile Include="Assets\Scripts\SpawnUpper.js" />
@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\TargetDestruct.js" />
      <Compile Include="Assets\Scripts\TargetScript.js" />
      <Compile Include="Assets\Scripts\WeaponDisplay.js" />
+     <Compile Include="Assets\Scripts\WeaponSelect.js" />
      <None Include="Assets\GoogleVR\Shaders\GvrUIOverlayFont.shader" />
      <None Include="Assets\GoogleVR\Shaders\GvrAdditiveOverlay.shader" />
      <None Include="Assets\GoogleVR\Shaders\GvrController.shader" />

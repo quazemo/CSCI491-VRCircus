@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 public final var MAX_SPAWNS : int = 3;
-public final var GAME_TIME : float = 60f;
+public final var GAME_TIME : float = 10f;
 
 public var difficulty : int;
 public var lowerWalls : SpawnLower[] = new SpawnLower[4];
@@ -9,7 +9,7 @@ public var highWalls : SpawnUpper[] = new SpawnUpper[2];
 public var spawnTimerL: float;
 public var spawnTimerU: float;
 public var spawnVariance: float;
-public var menuBoard: GameObject;
+public var menuBoard: MenuHandler;
 public var gameTime: GameTimer;
 
 private var targetTimer : float;
@@ -30,7 +30,6 @@ function onStart(diff: int)
 	this.enabled = true;
 	gameTime.setTimer(GAME_TIME);
 	gameTime.gameObject.SetActive(true);
-	menuBoard.SetActive(false);
 }
 
 function updateDifficulty()
@@ -69,7 +68,7 @@ function updateDifficulty()
 function onStop() 
 {
 	this.enabled = false;
-	menuBoard.SetActive(true);
+	menuBoard.reveal();
 	gameTime.gameObject.SetActive(false);
 }
 

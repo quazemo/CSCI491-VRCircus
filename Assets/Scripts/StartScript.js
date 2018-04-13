@@ -1,21 +1,24 @@
 ﻿#pragma strict
 
-public var sd : SpawnDirector;
+public var sdir : SpawnDirector;
+public var menuH : MenuHandler;
 private var diff : int = 1;
 
 function OnMouseDown()
 {
-	if (!sd.enabled)
+	if (!sdir.enabled)
 	{
-		sd.onStart(diff);
+		sdir.onStart(diff);
 	}
 }
 
 function OnCollisionEnter(col : Collision)
 {
-    if (!sd.enabled)
+    if (!sdir.enabled)
 	{
-		sd.onStart(diff);
+		Debug.Log("Starting up game!");
+		menuH.hide();
+		sdir.onStart(diff);
 	}
 }
 

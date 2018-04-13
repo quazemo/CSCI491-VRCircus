@@ -30,11 +30,11 @@ function Update () {
 	}
 	if (rotateLR)
 	{
-		transform.Rotate(Vector3.up * rotateLR * sensativity * Time.deltaTime);
+		transform.Rotate(Vector3.up * rotateLR * sensativity * Time.deltaTime, Space.World);
 	}
 	if (rotateUD)
 	{
-		transform.Rotate(Vector3.right * rotateUD * sensativity * Time.deltaTime);
+		transform.Rotate(Vector3.right * rotateUD * sensativity * Time.deltaTime, Space.Self);
 	}
 	if (posLR)
 	{
