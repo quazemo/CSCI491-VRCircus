@@ -23,6 +23,12 @@ function addScore(point: int, dist: int)
 	updateText();
 }
 
+function resetScore()
+{
+	playerScore = 0;
+	updateText();
+}
+
 function getScore() : int
 {
 	return playerScore;

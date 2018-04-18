@@ -1,22 +1,22 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\WeaponSelect.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\StartScript.js">
     <Files>
       <File FileName="Assets\Scripts\StartScript.js" Line="15" Column="1" />
       <File FileName="Assets\Scripts\MenuHandler.js" Line="31" Column="24" />
-      <File FileName="Assets\Scripts\DifficultySelect.js" Line="15" Column="2" />
-      <File FileName="Assets\Scripts\SpawnDirector.js" Line="71" Column="1" />
-      <File FileName="Assets\Scripts\GameTimer.js" Line="19" Column="3" />
+      <File FileName="Assets\Scripts\DifficultySelect.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\SpawnDirector.js" Line="4" Column="40" />
+      <File FileName="Assets\Scripts\GameTimer.js" Line="22" Column="13" />
       <File FileName="Assets\Scripts\SpawnLower.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\SpawnUpper.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\AbductorScript.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\TargetScript.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Score.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Score.js" Line="26" Column="20" />
       <File FileName="Assets\Scripts\GunScript.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ProjectileScript.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\TargetDestruct.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Pause.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\WeaponSelect.js" Line="32" Column="67" />
+      <File FileName="Assets\Scripts\WeaponSelect.js" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
