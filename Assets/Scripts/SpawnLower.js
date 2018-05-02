@@ -29,19 +29,16 @@ function randomSpawn () {
 	 {
 	 	case 0:
 	 		spawnPos = spawnLeft.transform.position;
-	 		//spawnPos.z += .3 * count;
 	 		spawnPos.y -= SPAWN_DEPTH;
 	 		target = Instantiate(targetBasic, spawnPos, Quaternion.identity, spawnLeft.transform);
 	 		break;
 	 	case 1:
 	 		spawnPos = spawnMid.transform.position;
-	 		//spawnPos.z += .3 * count;
 	 		spawnPos.y -= SPAWN_DEPTH;
 	 		target = Instantiate(targetBasic, spawnPos, Quaternion.identity, spawnMid.transform);
 	 		break;
 	 	case 2:
 	 		spawnPos = spawnRight.transform.position;
-	 		//spawnPos.z += .3 * count;
 	 		spawnPos.y -= SPAWN_DEPTH;
 	 		target = Instantiate(targetBasic, spawnPos, Quaternion.identity, spawnRight.transform);
 	 		break;
@@ -51,15 +48,7 @@ function randomSpawn () {
 	 target.rotation = rot;
 	 //target.transform.rotation.SetLookRotation(target.parent.forward, target.parent.transform.up);
 	 target.transform.Translate((Vector3.forward * (.3 * count)));
-	 /*
-	 if (target.transform.right == target.parent.transform.right)
-	 {
-	 	Debug.Log("LParent match: " + target.transform.right);
-	 }
-	 else
-	 {
-	 	Debug.Log("LParent mismatch: T: " + target.transform.right + "\nP: " + target.parent.transform.right);
-	 }*/
+
 	 var destructScript :TargetDestruct = target.gameObject.GetComponentInChildren(TargetDestruct);
 	 destructScript.setDistance(distance);
 	 destructScript.setScoreUpdater(scoreUpdater);

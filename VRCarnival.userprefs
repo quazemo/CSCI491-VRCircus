@@ -1,22 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\StartScript.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Director.js">
     <Files>
-      <File FileName="Assets\Scripts\StartScript.js" Line="15" Column="1" />
-      <File FileName="Assets\Scripts\MenuHandler.js" Line="31" Column="24" />
-      <File FileName="Assets\Scripts\DifficultySelect.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SpawnDirector.js" Line="4" Column="40" />
-      <File FileName="Assets\Scripts\GameTimer.js" Line="22" Column="13" />
-      <File FileName="Assets\Scripts\SpawnLower.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\SpawnUpper.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\AbductorScript.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TargetScript.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Score.js" Line="26" Column="20" />
-      <File FileName="Assets\Scripts\GunScript.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ProjectileScript.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TargetDestruct.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Pause.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\WeaponSelect.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Director.js" Line="39" Column="2" />
+      <File FileName="Assets\Scripts\Spawner.js" Line="9" Column="24" />
+      <File FileName="Assets\Scripts\TargetInfo.js" Line="32" Column="2" />
+      <File FileName="Assets\Scripts\TargetManager.js" Line="65" Column="13" />
+      <File FileName="Assets\Scripts\Target.js" Line="41" Column="3" />
+      <File FileName="Assets\Scripts\TargetMovement.js" Line="46" Column="20" />
+      <File FileName="Assets\Scripts\MenuHandler.js" Line="16" Column="1" />
+      <File FileName="Assets\Resources\Text\targetInfo.xml" Line="3" Column="83" />
+      <File FileName="Assets\Scripts\Score.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\StartScript.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Start.js" Line="3" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

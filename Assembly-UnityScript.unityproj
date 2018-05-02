@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AbductorScript.js" />
      <Compile Include="Assets\Scripts\DifficultySelect.js" />
+     <Compile Include="Assets\Scripts\Director.js" />
      <Compile Include="Assets\Scripts\EasyStart.js" />
      <Compile Include="Assets\Scripts\GameTimer.js" />
      <Compile Include="Assets\Scripts\GunScript.js" />
@@ -60,12 +61,20 @@
      <Compile Include="Assets\Scripts\SpawnDirector.js" />
      <Compile Include="Assets\Scripts\SpawnLower.js" />
      <Compile Include="Assets\Scripts\SpawnUpper.js" />
+     <Compile Include="Assets\Scripts\Spawner.js" />
+     <Compile Include="Assets\Scripts\Start.js" />
      <Compile Include="Assets\Scripts\StartScript.js" />
+     <Compile Include="Assets\Scripts\Target.js" />
+     <Compile Include="Assets\Scripts\TargetCounter.js" />
      <Compile Include="Assets\Scripts\TargetDestruct.js" />
+     <Compile Include="Assets\Scripts\TargetInfo.js" />
+     <Compile Include="Assets\Scripts\TargetManager.js" />
+     <Compile Include="Assets\Scripts\TargetMovement.js" />
      <Compile Include="Assets\Scripts\TargetScript.js" />
      <Compile Include="Assets\Scripts\WeaponDisplay.js" />
      <Compile Include="Assets\Scripts\WeaponSelect.js" />
      <None Include="Assets\GoogleVR\Shaders\GvrUIOverlayFont.shader" />
+     <None Include="Assets\Resources\Text\targetInfo.xml" />
      <None Include="Assets\GoogleVR\Shaders\GvrAdditiveOverlay.shader" />
      <None Include="Assets\GoogleVR\Shaders\GvrController.shader" />
      <None Include="Assets\GoogleVR\Shaders\GvrUnlitTransparentOverlay.shader" />
