@@ -17,5 +17,6 @@ function setSpeed(speed : Vector3)
 function OnCollisionEnter(col : Collision)
 {
 	Debug.Log("Proj: hit " + col.gameObject.tag);
+
 	Destroy(gameObject);
 }

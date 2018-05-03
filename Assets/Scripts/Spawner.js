@@ -4,13 +4,13 @@ public var id : char = "X"[0];
 public var spawnLeft : Transform;
 public var spawnMid : Transform;
 public var spawnRight : Transform;
-public static var SPAWN_DEPTH = 1.3;
+public var SPAWN_DEPTH = 1.3;
 public var distance : int;
 public var scoreUpdater : Score;
 public var dir : Director;
 
 
-private var targets : TargetInfo[];
+public var targets : TargetInfo[];
 
 public var count : int = 0;
 
@@ -69,6 +69,7 @@ function randomSpawn () {
 	*/
 	var tScript : Target = target.gameObject.AddComponent(Target);
 	tScript.initialize(spawnInfo);
+	tScript.scoreUpdater = scoreUpdater;
 
 	count++;
 }

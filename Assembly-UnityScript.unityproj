@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AbductorScript.js" />
+     <Compile Include="Assets\Scripts\ChildCollider.js" />
+     <Compile Include="Assets\Scripts\ChildCollision.js" />
      <Compile Include="Assets\Scripts\DifficultySelect.js" />
      <Compile Include="Assets\Scripts\Director.js" />
      <Compile Include="Assets\Scripts\EasyStart.js" />

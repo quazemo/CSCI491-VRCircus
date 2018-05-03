@@ -5,7 +5,7 @@ Director controls activation of the various spawners. This includes starting, st
 */
 
 public final var MAX_SPAWNS : int = 3;
-public final var GAME_TIME : float = 10f;
+public final var GAME_TIME : float = 30f;
 
 public var difficulty : int;
 public var spawners : Spawner[];
@@ -136,7 +136,7 @@ function spawnRandTarget()
 	while (notSpawned && trySpawn > 0)
 	{
 		spawnIndex = Random.Range(0, spawners.length); 
-		Debug.Log("spawnIndex: " + spawnIndex);
+		//Debug.Log("spawnIndex: " + spawnIndex);
 		if (spawners[spawnIndex].getCount() < MAX_SPAWNS)
 		{
 			spawners[spawnIndex].randomSpawn();

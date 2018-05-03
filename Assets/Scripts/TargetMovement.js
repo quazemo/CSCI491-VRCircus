@@ -6,7 +6,7 @@ public class TargetMovement
 	public var hSpeed : int;
 	public var vSpeed : int;
 	private var travelDir : Vector3;
-	private var upDir : Vector3;
+	public var upDir : Vector3;
 	public var isDone : boolean;
 	public var isUp : boolean;
 
@@ -16,7 +16,7 @@ public class TargetMovement
 		isUp = false;
 		hSpeed = 0;
 		vSpeed = 0;
-		upDir = spawnLoc.up;
+		upDir = Vector3.up;
 		parentDir(spawnLoc);
 	}
 
@@ -26,7 +26,7 @@ public class TargetMovement
 		isUp = tMove.isDone;
 		hSpeed = tMove.hSpeed;
 		vSpeed = tMove.vSpeed;
-		upDir = spawnLoc.up;
+		upDir = Vector3.up;
 		parentDir(spawnLoc);
 	}
 
@@ -46,7 +46,7 @@ public class TargetMovement
 		isUp = move.isUp;
 		hSpeed = move.hSpeed;
 		vSpeed = move.vSpeed;
-		upDir = spawnLoc.up;
+		upDir = Vector3.up;
 		parentDir(spawnLoc);
 	}
 
@@ -90,9 +90,9 @@ public class TargetMovement
 		}
 		else if (!isUp && !isDone)
 		{
-			if (transform.position.y < transform.parent.transform.position.y)
+			if (transform.localPosition.y < 0 )
 			{
-				transform.Translate(upDir * vSpeed * Time.deltaTime);
+				transform.Translate(upDir * vSpeed * Time.deltaTime, Space.Self);
 			}
 			else
 			{
