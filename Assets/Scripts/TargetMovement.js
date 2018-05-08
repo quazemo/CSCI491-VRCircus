@@ -3,8 +3,8 @@
 public class TargetMovement
 {
 
-	public var hSpeed : int;
-	public var vSpeed : int;
+	public var hSpeed : float;
+	public var vSpeed : float;
 	private var travelDir : Vector3;
 	public var upDir : Vector3;
 	public var isDone : boolean;
@@ -30,7 +30,7 @@ public class TargetMovement
 		parentDir(spawnLoc);
 	}
 
-	public function TargetMovement(hSpd : int, vSpd : int)
+	public function TargetMovement(hSpd : float, vSpd : float)
 	{
 		isDone = false;
 		isUp = false;

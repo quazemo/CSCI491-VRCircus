@@ -7,21 +7,24 @@ public class TargetManager
 
 	private var targetDict : Dictionary.<String, TargetInfo>;
 	private var targetXmlFile : TextAsset;
+	private var poolDict : Dictionary.<String, int>;
+	private var targCountDict : Dictionary.<char, int>;
 
 	public function TargetManager(spawners : Spawner[], targXml : TextAsset)
 	{
 		targetXmlFile = targXml;
 		targetDict = new Dictionary.<String, TargetInfo>();
-		var targCountDict : Dictionary.<char, int> = new Dictionary.<char, int>();
+		poolDict = new Dictionary.<String, int>();
+
+		targCountDict = new Dictionary.<char, int>();
 		for (var i : int = 0; i < spawners.length; i++)
 		{
 			targCountDict[spawners[i].id] = 0;
 		}
-		targetXmlFile = targXml;
-		parseTargetsXml(spawners, targCountDict);
+		parseTargetsXml(spawners);
 	}
 
-	private function parseTargetsXml(spawners : Spawner[], targCountDict : Dictionary.<char, int>)
+	private function parseTargetsXml(spawners : Spawner[])
 	{
 		var xmlDoc : XmlDocument = new XmlDocument();
 		xmlDoc.LoadXml(targetXmlFile.text);
@@ -34,7 +37,7 @@ public class TargetManager
 			node = targetList.Item(i);
 			if (node.NodeType == XmlNodeType.Element)
 			{
-				parseTargetAttr(node as XmlElement, spawners, targCountDict);
+				parseTargetAttr(node as XmlElement, spawners);
 			}
 		}
 
@@ -56,16 +59,12 @@ public class TargetManager
 	private function fillSpawnerList(spawner : Spawner, size : int)
 	{
 		var tInfoList : TargetInfo[] = new TargetInfo[size];
-		//for each key with targetInfo
 		var index : int = 0;
 		var ids : String;
 		for (var key : String in targetDict.Keys)
 		{
-			Debug.Log("filling " + key);
 			ids = targetDict[key].getIds();
-			Debug.Log("ids for target info: " + ids);
-			//match spawner?
-			if (ids.IndexOf(spawner.id) && index < tInfoList.length)
+			if (ids.IndexOf(spawner.id) > -1 && index < tInfoList.length)
 			{
 				tInfoList[index] = targetDict[key];
 				index++;
@@ -74,7 +73,7 @@ public class TargetManager
 		spawner.setTargets(tInfoList);
 	}
 
-	private function parseTargetAttr(targetElem : XmlElement, spawners : Spawner[], targCountDict : Dictionary.<char, int>)
+	private function parseTargetAttr(targetElem : XmlElement, spawners : Spawner[])
 	{
 		var name : String;
 		var loc : String;
@@ -83,6 +82,7 @@ public class TargetManager
 		var hSpeed : float;
 		var vSpeed : float;
 		var prefab : GameObject;
+		var pool : int;
 
 		name = targetElem.GetAttribute("name");
 		loc = targetElem.GetAttribute("loc");
@@ -90,18 +90,16 @@ public class TargetManager
 		points = parseInt(targetElem.GetAttribute("points"));
 		hSpeed = parseFloat(targetElem.GetAttribute("hSpeed"));
 		vSpeed = parseFloat(targetElem.GetAttribute("vSpeed"));
+		pool = parseInt(targetElem.GetAttribute("pool"));
 
 		prefab = Resources.Load(loc, GameObject);
-
-		if (prefab != null)
-		{
-			Debug.Log(name + " " + loc + " " + ids + " " + prefab + " h" + hSpeed + " v" + vSpeed);
-		}
 
 		var move : TargetMovement = new TargetMovement(hSpeed, vSpeed);
 		var tInfo : TargetInfo = TargetInfo(move, points, prefab);
 		tInfo.setIds(ids);
+		tInfo.setName(name);
 
+		poolDict[name] = pool;
 		targetDict[name] = tInfo;
 
 		for (var i : int = 0; i < ids.length; i++)
@@ -111,5 +109,15 @@ public class TargetManager
 				targCountDict[ids[i]] += 1;
 			}
 		}
+	}
+
+	public function getSignCounts()
+	{
+		return new Dictionary.<String, int>(poolDict);
+	}
+
+	public function getSpawnerTargetMap()
+	{
+		return targetDict;
 	}
 }

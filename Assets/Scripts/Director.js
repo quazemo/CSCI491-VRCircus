@@ -4,144 +4,235 @@
 Director controls activation of the various spawners. This includes starting, stopping, pausing, resuming, and difficulty setup. 
 */
 
-public final var MAX_SPAWNS : int = 3;
-public final var GAME_TIME : float = 30f;
-
 public var difficulty : int;
 public var spawners : Spawner[];
-public var spawnTimerL: float;
-public var spawnTimerU: float;
-public var spawnVariance: float;
-public var menuBoard: MenuHandler;
-public var gameTime: TargetCounter;
+public var menuBoard: MenuGroup;
+public var targCount: TargetCounter;
+public var scoreBoard : Score;
 
-public var numTargets : int[];
 public var tManage : TargetManager;
 public var targXml : TextAsset;
+private var deadSpawnerCount : int = 0;
 
-private var targetTimer : float;
-private var abductTimer : float;
+public var DUT_MAX : float = 20f;
+private var diffUpTimer : float = DUT_MAX;
 
 
 function Awake () 
-{
+{	
 	tManage = new TargetManager(spawners, targXml);
+	//clearDeadSpawners();
 	difficulty = 0;
 	this.enabled = false;
 }
 
 function onStart(diff: int) 
 {
-	Debug.Log("OnStart called");
+	Debug.Log("OnStart called with " + diff);
+
+	//reset the difficulty increase timer
+	diffUpTimer = DUT_MAX;
+
+	//reset scoreboard
+	scoreBoard.resetScore();
+
+	for (var i : int = 0; i < spawners.length; i++)
+	{
+		//clear out any targets still active
+		spawners[i].commandTargets("Clear");
+		spawners[i].resetSpawnSpeed();
+	}
+
+	//set up the number of signs based on the difficutly & difficulty increase timer
 	difficulty = diff;
 	updateDifficulty();
+
+	//turn on the spawners
+	toggleSpawners(true);
+
+	//turn on the difficulty increasing script
 	this.enabled = true;
-	gameTime.setTimer(GAME_TIME);
-	gameTime.gameObject.SetActive(true);
+
 }
 
 function onStop() 
 {
+	//turn spawners off
+	toggleSpawners(false);
+
+	//turn of difficulty increasing script
 	this.enabled = false;
+
+	for (var i : int = 0; i < spawners.length; i++)
+	{
+		//clear out any active signs
+		spawners[i].commandTargets("Clear");
+		//reset the RNG
+		spawners[i].resetSpawnSpeed();
+		//reset the type counter
+		spawners[i].raiseDead();
+	}
+
+	//reset dead spawner count
+	deadSpawnerCount = 0;
+
+	//reveal the menu again
 	menuBoard.reveal();
-	gameTime.gameObject.SetActive(false);
 }
 
 function onPause()
 {
+	for (var i : int = 0; i < spawners.length; i++)
+	{
+		spawners[i].commandTargets("Pause");
+	}
+
+	//reveal menu
+	menuBoard.reveal();
+
 }
 
 function onResume()
 {
+	for (var i : int = 0; i < spawners.length; i++)
+	{
+		spawners[i].commandTargets("Resume");
+	}
+
+	menuBoard.hide();
+}
+
+
+function Update()
+{
+	diffUpTimer = diffUpTimer - Time.deltaTime;
+	if (diffUpTimer <= 0)
+	{
+		diffUpTimer = DUT_MAX;
+		difficultyUp();
+	}
+}
+
+function difficultyUp()
+{
+	Debug.Log("Upping difficulty");
+	for (var i : int = 0; i < spawners.length; i++)
+	{
+		spawners[i].addSpawnSpeed(1);
+	}
+	diffUpTimer = DUT_MAX;
 }
 
 function updateDifficulty()
 {
 	Debug.Log("Updating difficulty... " + difficulty);
-	switch(difficulty)
+	switch (difficulty)
 	{
 		case 0:
-			spawnTimerL = 2f;
-			spawnTimerU = 10000f;
-			spawnVariance = 1f;
-			Debug.Log("Easy mode, " + difficulty);
+			targCount.setCount(tManage.getSignCounts(), 0.5f);
+			DUT_MAX = 10000;
 			break;
 		case 1:
-			spawnTimerL = 1f;
-			spawnTimerU = 1000f;
-			spawnVariance = 1f;
-			Debug.Log("Medium mode, " + difficulty);
+			targCount.setCount(tManage.getSignCounts(), 1f);
+			DUT_MAX = 40;
 			break;
 		case 2:
-			spawnTimerL = 0f;
-			spawnTimerU = 40f;
-			spawnVariance = 2f;
-			Debug.Log("Hard mode, " + difficulty);
+			targCount.setCount(tManage.getSignCounts(), 2f);
+			DUT_MAX = 20;
 			break;
 		default:
-			spawnTimerL = 7f;
-			spawnTimerU = 1000f;
-			spawnVariance = 5f;
-			Debug.Log("Default mode, " + difficulty);
+			targCount.setCount(tManage.getSignCounts(), 1f);
+			DUT_MAX = 40;
+			break;
 	}
-	targetTimer = spawnTimerL;
-	abductTimer = spawnTimerU;
 }
 
-function Update () 
+private function toggleSpawners(doEnable : boolean)
 {
-	var spawnTarget: boolean = false;
-	var spawnAbductor: boolean = false;
-
-	targetTimer -= Time.deltaTime;
-	abductTimer -= Time.deltaTime;
-
-	if (targetTimer <= 0) 
+	for (var i : int = 0; i < spawners.length; i++)
 	{
-		spawnTarget = true;
+		spawners[i].enabled = doEnable;
 	}
-	if (abductTimer <= 0)
-	{
-		spawnAbductor = true;
-	}
-
-	if (spawnTarget)
-	{
-		spawnRandTarget();
-		spawnTarget = false;
-		targetTimer =  spawnTimerL + variance();
-	}
-
 }
 
-function variance() : float
+//this function, when notified of a dead spawner, will notify the other spawners if they need to be speed up.
+//it also increments the deadSpawnerCount, and ends the game when all are dead. 
+public function obituary(sId : char)
 {
-	var neg : int = Random.Range(0, 2);
-	if (neg == 0)
+	deadSpawnerCount += 1;
+	if (deadSpawnerCount >= spawners.length)
 	{
-		return Random.Range(0f, spawnVariance);
+		onStop();
 	}
 	else
 	{
-		return -Random.Range(0f, spawnVariance);
+		analyzeDeaths();
 	}
 }
 
-function spawnRandTarget()  
+//this function finds out which spawners need speeding up, and speeds them up if necessary.
+private function analyzeDeaths()
 {
-	var notSpawned : boolean = true;
-	var spawnIndex : int;
-	var trySpawn : int = 2;
-
-	while (notSpawned && trySpawn > 0)
+	var workload : Dictionary.<char, float> = new Dictionary.<char, float>();
+	var targDict : Dictionary.<String, TargetInfo> = tManage.getSpawnerTargetMap();
+	var spawnDict : Dictionary.<char, Spawner> = new Dictionary.<char, Spawner>();
+	for (var i : int = 0 ; i < spawners.length; i++)
 	{
-		spawnIndex = Random.Range(0, spawners.length); 
-		//Debug.Log("spawnIndex: " + spawnIndex);
-		if (spawners[spawnIndex].getCount() < MAX_SPAWNS)
-		{
-			spawners[spawnIndex].randomSpawn();
-			notSpawned = false;
-		}
-		trySpawn--;
+		workload[spawners[i].id] = spawners[i].getSpawnSpeed();
+		spawnDict[spawners[i].id] = spawners[i];
 	}
+	var remTargDict : Dictionary.<String, int>;
+	remTargDict = targCount.getTargetCounts();
+
+	var typeWorkload : Dictionary.<String, float>;
+	typeWorkload = calculateRngTypeSpeed(workload, targDict, remTargDict);
+
+	var min : float = -1;
+	for (var key : String in typeWorkload.Keys)
+	{
+		if (typeWorkload[key] < min || (min == -1 && typeWorkload[key] != 0))
+		{
+			min = typeWorkload[key];
+		}
+	}
+
+	var sid : char;
+	var idsLen : int;
+	var factorLimit : int = 4;
+	var boost : int;
+	for (var key : String in targDict.Keys)
+	{
+		if (typeWorkload[key] > 0 && typeWorkload[key] >= factorLimit * min)
+		{
+			Debug.Log("Speeding up " + key);
+			idsLen = targDict[key].getIds().length;
+			boost = factorLimit / idsLen;
+			if (boost < 1)
+			{
+				boost = 1;
+			}
+			for (var j : int = 0; j < idsLen; j++)
+			{
+				sid = targDict[key].getIds()[j];
+				spawnDict[sid].addSpawnSpeed(boost);
+			}
+		}
+	}
+
+}
+
+//this function calculates the typeWorkload of the system. Essentially, it is finding out how many signs are going to be spawned per RNG, organized by type
+private function calculateRngTypeSpeed(workload : Dictionary.<char, float>, targDict : Dictionary.<String, TargetInfo>, remTargDict : Dictionary.<String, int>)
+{
+	var typeWorkload : Dictionary.<String, float> = new Dictionary.<String, float>();
+	for (var key : String in targDict.Keys)
+	{
+		typeWorkload[key] = 0;
+		for (var i : int = 0; i < targDict[key].getIds().length; i++)
+		{
+			typeWorkload[key] += workload[targDict[key].getIds()[i]];
+		}
+		typeWorkload[key] = remTargDict[key] / typeWorkload[key];
+	}
+	return typeWorkload;
 }

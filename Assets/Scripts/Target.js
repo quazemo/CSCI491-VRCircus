@@ -5,7 +5,7 @@ public var pointValue : int;
 public var moveBehav : TargetMovement;
 public var spawner : Spawner;
 public var scoreUpdater : Score;
-
+public var destruct : boolean = true;
 
 public class Target extends MonoBehaviour implements ChildCollider
 {
@@ -30,11 +30,19 @@ public class Target extends MonoBehaviour implements ChildCollider
 	function pause()
 	{
 		enabled = false;
+		destruct = false;
 	}
 
 	function resume()
 	{
 		enabled = true;
+		destruct = true;
+	}
+
+	function finish()
+	{
+		moveBehav.isDone = true;
+		destruct = false;
 	}
 
 	function OnCollisionEnter(col : Collision)
@@ -52,8 +60,11 @@ public class Target extends MonoBehaviour implements ChildCollider
 		if (col.gameObject.tag == "Projectile")
 		{
 			Debug.Log("Hit by Projectile");
-			scoreUpdater.addScore(pointValue, 1);
-			Destroy(childObj);
+			if (destruct)
+			{
+				scoreUpdater.addScore(pointValue, 1);
+				Destroy(childObj);
+			}
 		}
 	}
 }

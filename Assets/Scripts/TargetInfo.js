@@ -6,6 +6,7 @@ public class TargetInfo
 	private var points : int;
 	private var ids : String;
 	private var prefab : GameObject;
+	private var name : String;
 
 	public function TargetInfo(move : TargetMovement, pointVal : int, obj : GameObject)
 	{
@@ -55,4 +56,13 @@ public class TargetInfo
 		movement = move;
 	}
 
+
+	public function getName()
+	{
+		return name;
+	}
+	public function setName(nm : String)
+	{
+		name = nm;
+	}
 }

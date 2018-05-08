@@ -1,8 +1,8 @@
 ﻿#pragma strict
 
-public var start : StartScript;
-public var menuHand : MenuHandler;
-public var diff : float = 1;
+public var start : Start;
+public var menuHand : MenuGroup;
+public var diff : int = 1;
 public var text : UI.Text;
 
 function OnCollisionEnter(col : Collision)

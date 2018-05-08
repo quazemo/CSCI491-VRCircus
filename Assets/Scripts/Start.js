@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 public var sdir : Director;
-public var menuH : MenuHandler;
+public var menuH : MenuGroup;
 private var diff : int = 1;
 public var score : Score;
 

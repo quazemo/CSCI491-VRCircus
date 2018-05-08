@@ -41,8 +41,6 @@ function Awake ()
 			travelDir = Vector3.left;
 			break;
 	}
-	//transform.SetParent(null);
-	
 }
 
 function Update () 
