@@ -18,7 +18,7 @@ function Start()
 
 function OnCollisionEnter(col : Collision)
 {
-	Debug.Log("Target: Hit by " + col.gameObject.tag);
+	//Debug.Log("Target: Hit by " + col.gameObject.tag);
 	if (col.gameObject.tag == "Projectile")
 	{
 		ccObj.contact(col, gameObject);

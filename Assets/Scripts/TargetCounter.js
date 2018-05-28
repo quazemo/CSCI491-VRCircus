@@ -3,15 +3,14 @@
 public var director : Director;
 public var countText : UI.Text;
 public var targetCounts : Dictionary.<String, int>;
-
+private var totalCount : int;
 
 function Update () {
-	var count : int = countAll();
-	if (count <= 0)
+	if (totalCount == 0)
 	{
-		director.onStop();
-		countText.text = "" + count;
 		enabled = false;
+		Debug.Log("Counter Finished " + Time.time);
+		totalCount = -1;
 	}
 }
 
@@ -64,12 +63,39 @@ function setCount(targCounts : Dictionary.<String, int>, difficultyMultiplier : 
 	for (var key : String in targCounts.Keys)
 	{
 		targetCounts[key] = targCounts[key] * difficultyMultiplier;
+		//Debug.Log("Staring with " + targetCounts[key] + " " + key);
 		sum += targetCounts[key];
 	}
 	countText.text = "" + sum;
+	totalCount = sum;
+}
+
+public function decrementCount()
+{
+	if (totalCount > 0)
+	{
+		totalCount -= 1;
+		countText.text = "" + totalCount;
+	}
+	else
+	{
+		Debug.Log("Decremented count below 0");
+	}
 }
 
 public function getTargetCounts()
 {
 	return targetCounts;
+}
+
+public function getTargetCount(name : String)
+{
+	if (name in targetCounts.Keys)
+	{
+		return targetCounts[name];
+	}
+	else
+	{
+		return 0;
+	}
 }

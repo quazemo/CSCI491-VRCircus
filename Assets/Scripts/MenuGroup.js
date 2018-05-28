@@ -5,6 +5,7 @@ public var weaponSelectButtons : GameObject[];
 public var instructionButton : GameObject;
 public var returnButton : GameObject;
 public var startButton : GameObject;
+public var pauseButton : GameObject;
 private var doHide : boolean = false;
 private var anim : Animator;
 
@@ -15,7 +16,7 @@ function Start()
 
 function hide() 
 {
-	Debug.Log("Hide");
+	//Debug.Log("Hide");
 	anim.SetBool("Hidden", true);
 	//yield WaitForSeconds(anim["SignAway"].length);
 }
@@ -27,7 +28,7 @@ function vanish(doVanish : int)
 
 function reveal() 
 {
-	Debug.Log("Reveal");
+	//Debug.Log("Reveal");
 	gameObject.SetActive(true);
 	anim.SetBool("Hidden", false);
 }
@@ -48,4 +49,10 @@ function toggleSelect(difficulty : DiffSelect)
 			button.select(false);
 		}
 	}
+}
+
+function pauseEnabled(isEnabled : boolean)
+{
+	var pause : Pause = pauseButton.GetComponent(Pause);
+	pause.pauseEnable(isEnabled);
 }

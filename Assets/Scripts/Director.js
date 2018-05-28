@@ -10,12 +10,24 @@ public var menuBoard: MenuGroup;
 public var targCount: TargetCounter;
 public var scoreBoard : Score;
 
-public var tManage : TargetManager;
+private var tManage : TargetManager;
 public var targXml : TextAsset;
 private var deadSpawnerCount : int = 0;
+private var isRunning = false;
+private var isPaused = false;
 
 public var DUT_MAX : float = 20f;
 private var diffUpTimer : float = DUT_MAX;
+
+function gameRunning()
+{
+	return isRunning;
+}
+
+function gamePaused()
+{
+	return isPaused;
+}
 
 
 function Awake () 
@@ -28,7 +40,10 @@ function Awake ()
 
 function onStart(diff: int) 
 {
-	Debug.Log("OnStart called with " + diff);
+	//Debug.Log("OnStart called with " + diff);
+
+	isRunning = true;
+	menuBoard.pauseEnabled(true);
 
 	//reset the difficulty increase timer
 	diffUpTimer = DUT_MAX;
@@ -57,6 +72,8 @@ function onStart(diff: int)
 
 function onStop() 
 {
+	isRunning = false;
+
 	//turn spawners off
 	toggleSpawners(false);
 
@@ -82,23 +99,24 @@ function onStop()
 
 function onPause()
 {
+	isPaused = true;
+	enabled = false;
 	for (var i : int = 0; i < spawners.length; i++)
 	{
 		spawners[i].commandTargets("Pause");
 	}
-
 	//reveal menu
 	menuBoard.reveal();
-
 }
 
 function onResume()
 {
+	isPaused = false;
+	enabled = true;
 	for (var i : int = 0; i < spawners.length; i++)
 	{
 		spawners[i].commandTargets("Resume");
 	}
-
 	menuBoard.hide();
 }
 
@@ -110,6 +128,12 @@ function Update()
 	{
 		diffUpTimer = DUT_MAX;
 		difficultyUp();
+
+		var tc : Dictionary.<String, int> = targCount.getTargetCounts();
+		//for (var key : String in tc.Keys)
+		//{
+		//	Debug.Log("Remainting " + key + "s: " + tc[key]);
+		//}
 	}
 }
 
@@ -118,7 +142,7 @@ function difficultyUp()
 	Debug.Log("Upping difficulty");
 	for (var i : int = 0; i < spawners.length; i++)
 	{
-		spawners[i].addSpawnSpeed(1);
+		spawners[i].addSpawnSpeed(5);
 	}
 	diffUpTimer = DUT_MAX;
 }
@@ -129,20 +153,21 @@ function updateDifficulty()
 	switch (difficulty)
 	{
 		case 0:
-			targCount.setCount(tManage.getSignCounts(), 0.5f);
-			DUT_MAX = 10000;
+			targCount.setCount(tManage.getSignCounts(), 0.1f);
+			DUT_MAX = 1000;
 			break;
 		case 1:
 			targCount.setCount(tManage.getSignCounts(), 1f);
-			DUT_MAX = 40;
+			DUT_MAX = 25;
 			break;
 		case 2:
 			targCount.setCount(tManage.getSignCounts(), 2f);
-			DUT_MAX = 20;
+			DUT_MAX = 10;
 			break;
 		default:
+			Debug.Log("Default difficulty");
 			targCount.setCount(tManage.getSignCounts(), 1f);
-			DUT_MAX = 40;
+			DUT_MAX = 20;
 			break;
 	}
 }
@@ -160,13 +185,15 @@ private function toggleSpawners(doEnable : boolean)
 public function obituary(sId : char)
 {
 	deadSpawnerCount += 1;
+	Debug.Log("dead rows: " + deadSpawnerCount);
 	if (deadSpawnerCount >= spawners.length)
 	{
+		Debug.Log("Stopping..." + Time.time);
 		onStop();
 	}
 	else
 	{
-		analyzeDeaths();
+		//analyzeDeaths();
 	}
 }
 

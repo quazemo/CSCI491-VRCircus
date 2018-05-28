@@ -1,25 +1,23 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Spawner.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TargetCounter.js">
     <Files>
-      <File FileName="Assets\Scripts\Director.js" Line="143" Column="3" />
-      <File FileName="Assets\Scripts\Spawner.js" Line="29" Column="15" />
-      <File FileName="Assets\Scripts\TargetCounter.js" Line="70" Column="2" />
-      <File FileName="Assets\Scripts\TargetInfo.js" Line="15" Column="16" />
-      <File FileName="Assets\Scripts\TargetManager.js" Line="121" Column="21" />
-      <File FileName="Assets\Scripts\Target.js" Line="45" Column="20" />
+      <File FileName="Assets\Scripts\Pause.js" Line="26" Column="2" />
+      <File FileName="Assets\Scripts\Director.js" Line="129" Column="24" />
+      <File FileName="Assets\Scripts\MenuGroup.js" Line="31" Column="4" />
+      <File FileName="Assets\Scripts\Spawner.js" Line="128" Column="3" />
+      <File FileName="Assets\Scripts\Target.js" Line="46" Column="4" />
+      <File FileName="Assets\Scripts\TargetCounter.js" Line="13" Column="19" />
+      <File FileName="Assets\Scripts\TargetInfo.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\TargetManager.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\TargetMovement.js" Line="60" Column="10" />
-      <File FileName="Assets\Scripts\Score.js" Line="26" Column="20" />
-      <File FileName="Assets\Scripts\StartScript.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Start.js" Line="27" Column="35" />
-      <File FileName="Assets\Scripts\TargetScript.js" Line="43" Column="3" />
-      <File FileName="Assets\Scripts\TargetDestruct.js" Line="8" Column="2" />
-      <File FileName="Assets\Scripts\ProjectileScript.js" Line="20" Column="1" />
-      <File FileName="Assets\Scripts\ChildCollision.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Score.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Start.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ProjectileScript.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ChildCollision.js" Line="21" Column="4" />
       <File FileName="Assets\Scripts\ChildCollider.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DiffSelect.js" Line="5" Column="22" />
-      <File FileName="Assets\Scripts\MenuGroup.js" Line="41" Column="34" />
-      <File FileName="Assets\Resources\Text\targetInfo.xml" Line="7" Column="11" />
+      <File FileName="Assets\Scripts\DiffSelect.js" Line="19" Column="1" />
+      <File FileName="Assets\Resources\Text\targetInfo.xml" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

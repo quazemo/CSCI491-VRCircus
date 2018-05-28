@@ -101,7 +101,7 @@ public class TargetMovement
 		}
 		else if (isDone && isUp)
 		{
-			if (transform.position.y >= transform.parent.transform.position.y - SpawnLower.SPAWN_DEPTH)
+			if (transform.localPosition.y >= 0 - SpawnLower.SPAWN_DEPTH)
 			{
 				transform.Translate(upDir * -vSpeed * Time.deltaTime);
 			}

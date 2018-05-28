@@ -16,18 +16,22 @@ public var count : int = 0;
 
 public var spawnSpeed : int = 0;
 public var SPAWN_SPEED_INIT = 0;
-public var SPAWN_LIMIT : int = 100000;
+public var SPAWN_LIMIT : int = 100;
 private var spawnSum : int = 0;
-private var deadCount : int = 0;
+public var deadCount : int = 0;
+public var TICK : float = .1f;
+private var tickTime : float = 0;
 
 function Start()
 {
 	this.enabled = false;
+	spawnSum = Random.Range(0, SPAWN_LIMIT);
 }
 
 //this function controls when a target spawns
-function FixedUpdate()
+function Update()
 {
+	
 	if (targets == null || targets.length == 0)
 	{
 		Debug.Log("null or 0-length target list");
@@ -35,16 +39,30 @@ function FixedUpdate()
 		return;
 	}
 
-	for (var i : int = 0; i < spawnSpeed; i++)
+	if (deadCount >= targets.length && count == 0)
 	{
-		spawnSum += Random.Range(0, 9);
+		this.enabled = false;
+		dir.obituary(id);
+		Debug.Log(id + " dead");
+		return;
 	}
 
-	if (spawnSum > SPAWN_LIMIT)
+	if (tickTime <= 0)
 	{
-		spawnSum = 0;
-		randomSpawn();
+		//Debug.Log(id + " spinning");
+		for (var i : int = 0; i < spawnSpeed; i++)
+		{
+			spawnSum += Random.Range(0, 9);
+		}
+		if (spawnSum > SPAWN_LIMIT)
+		{
+			spawnSum = 0;
+			randomSpawn();
+		}
+		tickTime = TICK;
 	}
+	tickTime -= Time.deltaTime;
+
 }
 
 //this function passes a command to all child targets. Current commands:
@@ -53,6 +71,22 @@ function FixedUpdate()
 //3. Resume -- This tells the targets to start moving and allow themselves to be destroyed
 public function commandTargets(command : String)
 {
+	switch (command)
+	{
+		case "Clear":
+			count = 0;
+			break;
+		case "Resume":
+			if (deadCount < targets.length)
+			{
+				this.enabled = true;
+			}
+			break;
+		case "Pause":
+			this.enabled = false;
+			break;
+	}
+	
 	var spawnPos : Transform;
 	var target : Target;
 	for (var i : int = 0; i < transform.childCount; i++)
@@ -94,16 +128,12 @@ function randomSpawn ()
 	}
 	if (count >= MAX_SPAWNS)
 	{
-		return;
-	}
-	if (deadCount >= targets.length && count == 0)
-	{
-		this.enabled = false;
-		//contact director : dead?
+		Debug.Log("Too many spawns");
 		return;
 	}
 	if (deadCount >= targets.length)
 	{
+		Debug.Log("All target counts are empty.");
 		return;
 	}
 
@@ -112,6 +142,7 @@ function randomSpawn ()
 
 	if (!requestTarget(spawnInfo.getName(), targId))
 	{
+		Debug.Log("requestDenied, trying another spawn");
 		//try to spawn a new target
 		randomSpawn();
 		return;
@@ -160,10 +191,20 @@ private function requestTarget(name : String, tInd : int)
 {
 	if (tCounter.reqTarget(name))
 	{
+		//need to check if it is the end, otherwise will end up waiting one extra cycle.
+		if (tCounter.getTargetCount(name) == 0)
+		{
+			Debug.Log("request death in line " + id);
+			var swapTarg : TargetInfo = targets[tInd];
+			targets[tInd] = targets[deadCount];
+			targets[deadCount] = swapTarg;
+			deadCount += 1;
+		}
 		return true;
 	}
 	else
 	{
+		Debug.Log("Backup request death " + id);
 		var swapTarget : TargetInfo = targets[tInd];
 		targets[tInd] = targets[deadCount];
 		targets[deadCount] = swapTarget;
@@ -203,6 +244,7 @@ function getCount() {
 
 function targetDestructed() {
 	count--;
+	tCounter.decrementCount();
 }
 
 //this function returns the approximate spawn speed at which it is currently pumping out one type of sign

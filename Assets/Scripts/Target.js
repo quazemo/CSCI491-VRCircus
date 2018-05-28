@@ -43,11 +43,12 @@ public class Target extends MonoBehaviour implements ChildCollider
 	{
 		moveBehav.isDone = true;
 		destruct = false;
+		Destroy(gameObject);
 	}
 
 	function OnCollisionEnter(col : Collision)
 	{
-		Debug.Log("Target: Hit by " + col.gameObject.tag);
+		//Debug.Log("Target: Hit by " + col.gameObject.tag);
 		if (col.gameObject.tag == "ShootingGalleryWall")
 		{
 			moveBehav.isDone = true;
@@ -59,11 +60,12 @@ public class Target extends MonoBehaviour implements ChildCollider
 	{
 		if (col.gameObject.tag == "Projectile")
 		{
-			Debug.Log("Hit by Projectile");
+			//Debug.Log("Hit by Projectile");
 			if (destruct)
 			{
 				scoreUpdater.addScore(pointValue, 1);
 				Destroy(childObj);
+				moveBehav.isDone = true;
 			}
 		}
 	}
