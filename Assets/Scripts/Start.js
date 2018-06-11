@@ -9,6 +9,9 @@ function OnMouseDown()
 {
 	if (!sdir.enabled)
 	{
+		Debug.Log("Starting up game!");
+		score.resetScore();
+		menuH.hide();
 		sdir.onStart(diff);
 	}
 }

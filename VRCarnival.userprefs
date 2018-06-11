@@ -1,23 +1,26 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\TargetCounter.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GoogleVR\Scripts\Utilities\GvrVRHelpers.cs">
     <Files>
-      <File FileName="Assets\Scripts\Pause.js" Line="26" Column="2" />
-      <File FileName="Assets\Scripts\Director.js" Line="129" Column="24" />
-      <File FileName="Assets\Scripts\MenuGroup.js" Line="31" Column="4" />
-      <File FileName="Assets\Scripts\Spawner.js" Line="128" Column="3" />
-      <File FileName="Assets\Scripts\Target.js" Line="46" Column="4" />
-      <File FileName="Assets\Scripts\TargetCounter.js" Line="13" Column="19" />
+      <File FileName="Assets\Scripts\Pause.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Director.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MenuGroup.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Spawner.js" Line="46" Column="1" />
+      <File FileName="Assets\Scripts\Target.js" Line="37" Column="3" />
+      <File FileName="Assets\Scripts\TargetCounter.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\TargetInfo.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\TargetManager.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\TargetMovement.js" Line="60" Column="10" />
+      <File FileName="Assets\Scripts\TargetMovement.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Score.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Start.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ProjectileScript.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ChildCollision.js" Line="21" Column="4" />
+      <File FileName="Assets\Scripts\ProjectileScript.js" Line="19" Column="53" />
+      <File FileName="Assets\Scripts\ChildCollision.js" Line="1" Column="1" />
       <File FileName="Assets\Scripts\ChildCollider.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DiffSelect.js" Line="19" Column="1" />
+      <File FileName="Assets\Scripts\DiffSelect.js" Line="1" Column="1" />
       <File FileName="Assets\Resources\Text\targetInfo.xml" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GunScript.js" Line="55" Column="1" />
+      <File FileName="Assets\GoogleVR\Scripts\EventSystem\InputModule\GvrPointerInputModule.cs" Line="141" Column="26" />
+      <File FileName="Assets\GoogleVR\Scripts\Utilities\GvrVRHelpers.cs" Line="47" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

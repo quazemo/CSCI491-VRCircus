@@ -49,10 +49,10 @@ function Update () {
 function fireEgg()
 {
 	var parent : Transform = gameObject.transform;
-	var spawnPos : Vector3 = parent.position;
+	var spawnPos : Vector3 = projectileSpawn.position;
 	var spawnAngle : Quaternion = new Quaternion();
 	spawnAngle.SetLookRotation(parent.transform.forward, parent.transform.up);
-
+	Debug.Log(spawnPos);
 	var projInst : Transform = Instantiate(projectile, spawnPos, Quaternion.identity);
 
 	projInst.rotation = spawnAngle;

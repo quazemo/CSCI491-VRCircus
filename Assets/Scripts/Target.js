@@ -6,6 +6,7 @@ public var moveBehav : TargetMovement;
 public var spawner : Spawner;
 public var scoreUpdater : Score;
 public var destruct : boolean = true;
+public var pointDisplay : UI.Text;
 
 public class Target extends MonoBehaviour implements ChildCollider
 {
@@ -13,13 +14,38 @@ public class Target extends MonoBehaviour implements ChildCollider
 	{
 		spawnLoc = transform.parent.transform;	
 		spawner = transform.parent.parent.GetComponent(Spawner);
+		pointDisplay = findPointDisplay();
 		moveBehav = new TargetMovement(spawnLoc);
+
+	}
+
+	private function findPointDisplay()
+	{
+		var obj : Transform = gameObject.transform.Find("Target/Canvas/Points");
+		if (obj == null)
+		{
+			Debug.Log("Cannot find the text UI object for a target");
+			return null;
+		}
+		var disp : UI.Text = obj.gameObject.GetComponent("Text") as UI.Text;
+		var testUp : Vector3 = obj.up;
+
+		if (obj.up.y < 0)
+		{
+			obj.RotateAround(obj.transform.position , obj.forward, 180);
+		}
+
+		return disp;
 	}
 
 	function initialize(tInfo : TargetInfo)
 	{
 		pointValue = tInfo.getPoints();
 		moveBehav.update(tInfo.getMovement(), spawnLoc);
+		if (pointDisplay != null)
+		{
+			pointDisplay.text = pointValue.ToString();
+		}
 	}
 
 	function Update () 
