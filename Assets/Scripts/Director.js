@@ -153,7 +153,7 @@ function updateDifficulty()
 	switch (difficulty)
 	{
 		case 0:
-			targCount.setCount(tManage.getSignCounts(), 0.1f);
+			targCount.setCount(tManage.getSignCounts(), 0.25f);
 			DUT_MAX = 1000;
 			break;
 		case 1:
