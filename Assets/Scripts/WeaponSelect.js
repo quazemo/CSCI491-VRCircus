@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-public var gun : Transform;
+private var gun : Transform;
 public var displayGun : Transform;
 public var colors : Material[];
 public var addition : int = 1;
@@ -8,6 +8,7 @@ private static var curr : int = 0;
 
 function Awake () {
 	//(if there were a player database, load the proper gun here)
+
 }
 
 function next()
@@ -21,7 +22,7 @@ function next()
 	var i : int;
 	for (i = 0; i < gun.childCount; i++)
 	{
-		Debug.Log("#Colors: [" + colors.length + "] Childeren: [" + gun.childCount + "] Curr: " + curr);
+		//Debug.Log("#Colors: [" + colors.length + "] Childeren: [" + gun.childCount + "] Curr: " + curr);
 		child = gun.GetChild(i);
 		child.gameObject.GetComponent(Renderer).material = colors[curr];
 	}
@@ -39,4 +40,15 @@ function OnCollisionEnter(col : Collision)
 	{
 		next();
 	}
+}
+
+function Update()
+{
+	var gunObj : GameObject = GameObject.FindWithTag("PlayerGun");
+	if (gunObj != null)
+	{
+		gun = gunObj.transform;
+		enabled = false;
+	}
+
 }

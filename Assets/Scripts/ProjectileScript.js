@@ -11,12 +11,12 @@ function Awake ()
 function setSpeed(speed : Vector3)
 {
 	physicsBody.velocity = speed;
-	//physicsBody.velocity = Vector3.forward;
+	physicsBody.isKinematic = false;
 }
 
 function OnCollisionEnter(col : Collision)
 {
-	Debug.Log("Proj: hit " + col.gameObject.tag + " " + col.gameObject.transform.position);
+	//Debug.Log("Proj: hit " + col.gameObject.tag + " " + col.gameObject.transform.position);
 
 	Destroy(gameObject);
 }

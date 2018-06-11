@@ -47,6 +47,16 @@ function Update()
 		return;
 	}
 
+	//this check covers for a specific case where death is normally delayed to until the next spawn. 
+	if (count == 0 && noTargetsRemain())
+	{
+		this.enabled = false;
+		deadCount = targets.length;
+		dir.obituary(id);
+		Debug.Log(id + " dead");
+		return;
+	}
+
 	if (tickTime <= 0)
 	{
 		//Debug.Log(id + " spinning");
@@ -63,6 +73,20 @@ function Update()
 	}
 	tickTime -= Time.deltaTime;
 
+}
+
+private function noTargetsRemain()
+{
+	var name : String;
+	for (var i : int = deadCount; i < targets.length; i++)
+	{
+		name = targets[i].getName();
+		if (name != null && tCounter.getTargetCount(name) == 0)
+		{
+			deathSwap(i);
+		}
+	}
+	return deadCount >= targets.length;
 }
 
 //this function passes a command to all child targets. Current commands:
@@ -194,23 +218,25 @@ private function requestTarget(name : String, tInd : int)
 		//need to check if it is the end, otherwise will end up waiting one extra cycle.
 		if (tCounter.getTargetCount(name) == 0)
 		{
-			Debug.Log("request death in line " + id);
-			var swapTarg : TargetInfo = targets[tInd];
-			targets[tInd] = targets[deadCount];
-			targets[deadCount] = swapTarg;
-			deadCount += 1;
+			//Debug.Log("request death in line " + id);
+			deathSwap(tInd);
 		}
 		return true;
 	}
 	else
 	{
-		Debug.Log("Backup request death " + id);
-		var swapTarget : TargetInfo = targets[tInd];
-		targets[tInd] = targets[deadCount];
-		targets[deadCount] = swapTarget;
-		deadCount += 1;
+		//Debug.Log("Backup request death " + id);
+		deathSwap(tInd);
 		return false;
 	}
+}
+
+private function deathSwap(tInd : int)
+{
+	var swapTarget : TargetInfo = targets[tInd];
+	targets[tInd] = targets[deadCount];
+	targets[deadCount] = swapTarget;
+	deadCount += 1;
 }
 
 function resetSpawnSpeed()

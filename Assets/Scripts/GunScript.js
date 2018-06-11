@@ -9,6 +9,8 @@ public var sensativity : float;
 private var right : Vector3;
 private var down : Vector3;
 
+//public var vrCtrl : GvrControllerInput;
+
 // Use this for initialization
 function Awake () {
 	right = transform.TransformDirection(Vector3.right);
@@ -19,6 +21,7 @@ function Awake () {
 // Update is called once per frame
 function Update () {
 	var fire : boolean = Input.GetButtonDown("FireProjectile");
+	//var fire2 : boolean = vrCtrl.ClickButtonDown();
 	var rotateLR : float = Input.GetAxis("RotateHGun");
 	var rotateUD : float = Input.GetAxis("RotateVGun");
 	var posLR : float = Input.GetAxis("PositionGunX");
@@ -52,11 +55,10 @@ function fireEgg()
 	var spawnPos : Vector3 = projectileSpawn.position;
 	var spawnAngle : Quaternion = new Quaternion();
 	spawnAngle.SetLookRotation(parent.transform.forward, parent.transform.up);
-	Debug.Log(spawnPos);
 	var projInst : Transform = Instantiate(projectile, spawnPos, Quaternion.identity);
 
 	projInst.rotation = spawnAngle;
-	var projScript : ProjectileScript =	projInst.gameObject.AddComponent(ProjectileScript);
+	var projScript : ProjectileScript = projInst.gameObject.AddComponent(ProjectileScript);
 	projScript.setSpeed(transform.TransformDirection(Vector3.forward * projectileSpeed));
 
 }

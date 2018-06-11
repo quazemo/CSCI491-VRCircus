@@ -9,7 +9,6 @@ function Update () {
 	if (totalCount == 0)
 	{
 		enabled = false;
-		Debug.Log("Counter Finished " + Time.time);
 		totalCount = -1;
 	}
 }

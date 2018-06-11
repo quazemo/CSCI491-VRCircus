@@ -157,16 +157,16 @@ function updateDifficulty()
 			DUT_MAX = 1000;
 			break;
 		case 1:
-			targCount.setCount(tManage.getSignCounts(), 1f);
+			targCount.setCount(tManage.getSignCounts(), .5f);
 			DUT_MAX = 25;
 			break;
 		case 2:
-			targCount.setCount(tManage.getSignCounts(), 2f);
+			targCount.setCount(tManage.getSignCounts(), 1f);
 			DUT_MAX = 10;
 			break;
 		default:
 			Debug.Log("Default difficulty");
-			targCount.setCount(tManage.getSignCounts(), 1f);
+			targCount.setCount(tManage.getSignCounts(), .5f);
 			DUT_MAX = 20;
 			break;
 	}
