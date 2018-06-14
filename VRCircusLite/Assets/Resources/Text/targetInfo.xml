@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="uft-8"?>
+<targets name="tList">
+	<target name="Bunny" loc="Prefabs/Targets/Bunny" points="5" hSpeed="3.5" vSpeed="3.5" spawnID="12" pool="70"/>
+	<target name="Dog" loc="Prefabs/Targets/Dog" points="10"  hSpeed="2.5" vSpeed="3.5" spawnID="23" pool="60"/>
+	<target name="Turtle" loc="Prefabs/Targets/Turtle" points="15"  hSpeed="1.5" vSpeed="3.5" spawnID="4" pool="30"/>
+	<target name="Duck" loc="Prefabs/Targets/Duck" points="20"  hSpeed="2" vSpeed="3.5" spawnID="AB" pool="40"/>
+</targets>

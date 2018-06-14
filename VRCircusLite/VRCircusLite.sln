@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRCircusLite", "VRCircusLite.csproj", "{28CB3816-6F93-5FCF-1F5E-2C55C8E51F84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VRCircusLite.Editor", "VRCircusLite.Editor.csproj", "{74659433-5EC7-06EE-D6BD-D8B0C44BCD9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28CB3816-6F93-5FCF-1F5E-2C55C8E51F84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28CB3816-6F93-5FCF-1F5E-2C55C8E51F84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28CB3816-6F93-5FCF-1F5E-2C55C8E51F84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28CB3816-6F93-5FCF-1F5E-2C55C8E51F84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74659433-5EC7-06EE-D6BD-D8B0C44BCD9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74659433-5EC7-06EE-D6BD-D8B0C44BCD9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74659433-5EC7-06EE-D6BD-D8B0C44BCD9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74659433-5EC7-06EE-D6BD-D8B0C44BCD9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55BCBCE4-2962-4CD9-A343-DCEC5734D958}
+	EndGlobalSection
+EndGlobal
